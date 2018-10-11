@@ -13,4 +13,8 @@ class Hangman(val pickedLetters: List<Char> = emptyList(),
     fun isWon(): Boolean {
         return !display().contains(placeholder)
     }
+
+    fun letters(): List<Char> {
+        return pickedLetters
+    }
 }
