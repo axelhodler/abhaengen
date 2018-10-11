@@ -27,6 +27,18 @@ class HangmanShould {
                     input = "tree",
                     picks = listOf('r', 't'),
                     expectedOutput = "tr__"
+            ),
+            HangmanTestData(
+                    input = "bar",
+                    picks = listOf('b', 'a', 'r'),
+                    expectedOutput = "bar",
+                    hasWon = true
+            ),
+            HangmanTestData(
+                    input = "bar",
+                    picks = listOf('b', 'a'),
+                    expectedOutput = "ba_",
+                    hasWon = false
             )
     )
 
@@ -38,26 +50,36 @@ class HangmanShould {
         testData.picks.forEach { subject.pick(it) }
 
         assertThat(subject.display()).isEqualTo(testData.expectedOutput)
+        assertThat(subject.isWon()).isEqualTo(testData.hasWon)
     }
 
     data class HangmanTestData(
             val input: String,
             val picks: List<Char> = emptyList(),
-            val expectedOutput: String
+            val expectedOutput: String,
+            val hasWon: Boolean = false
     )
 
 }
 
 class Hangman(val wordToGuess: String) {
+    val placeholder = "_"
+
     fun display(): String {
         return wordToGuess
-                .map { if (pickedChars.contains(it)) it else "_" }
+                .map { placeholderOrFoundCharacter(character = it) }
                 .joinToString(separator = "")
     }
+
+    private fun placeholderOrFoundCharacter(character: Char) = if (pickedChars.contains(character)) character else placeholder
 
     private var pickedChars = mutableListOf<Char>()
 
     fun pick(letter: Char) {
-        this.pickedChars.add(letter);
+        this.pickedChars.add(letter)
+    }
+
+    fun isWon(): Boolean {
+        return !display().contains(placeholder)
     }
 }
