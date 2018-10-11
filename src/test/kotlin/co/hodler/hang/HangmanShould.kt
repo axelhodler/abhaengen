@@ -46,9 +46,10 @@ class HangmanShould {
     @ParameterizedTest
     @MethodSource("testDataProvider")
     fun `display word, without found characters, with underscores`(testData: HangmanTestData) {
-        val subject = Hangman(wordToGuess = testData.input)
-
-        testData.picks.forEach { subject.pick(it) }
+        val subject = Hangman(
+                pickedLetters = testData.picks,
+                wordToGuess = testData.input
+        )
 
         assertThat(subject.display()).isEqualTo(testData.expectedOutput)
         assertThat(subject.isWon()).isEqualTo(testData.hasWon)
