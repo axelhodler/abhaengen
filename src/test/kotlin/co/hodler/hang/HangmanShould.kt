@@ -63,7 +63,7 @@ class HangmanShould {
 }
 
 class Hangman(val wordToGuess: String) {
-    val placeholder = "_"
+    val placeholder = '_'
 
     fun display(): String {
         return wordToGuess
@@ -71,7 +71,7 @@ class Hangman(val wordToGuess: String) {
                 .joinToString(separator = "")
     }
 
-    private fun placeholderOrFoundCharacter(character: Char) = if (pickedChars.contains(character)) character else placeholder
+    private fun placeholderOrFoundCharacter(character: Char): Char = if (pickedChars.contains(character)) character else placeholder
 
     private var pickedChars = mutableListOf<Char>()
 

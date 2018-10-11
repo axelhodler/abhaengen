@@ -39,6 +39,12 @@ repositories {
 	mavenCentral()
 }
 
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
 
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter')
