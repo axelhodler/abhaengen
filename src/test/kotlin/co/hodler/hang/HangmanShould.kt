@@ -1,12 +1,14 @@
 package co.hodler.hang
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Tag("unit")
 class HangmanShould {
 
     private fun testDataProvider() = Stream.of(
