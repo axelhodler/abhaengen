@@ -2,7 +2,8 @@ package co.hodler.hang
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
 @SpringBootApplication
@@ -14,10 +15,22 @@ fun main(args: Array<String>) {
 
 @RestController
 class GameController {
-    @GetMapping("/game")
+    @PostMapping("/game")
     fun `play`(): String {
         return """
-            { "placeholder": "____" }
+            {
+                "game_id": "1",
+                "placeholder": "____"
+            }
+        """.trimIndent()
+    }
+
+    @PatchMapping("/game/{gameId}")
+    fun `pick letter`(): String {
+        return """
+            {
+                "placeholder": "_r__"
+            }
         """.trimIndent()
     }
 }
