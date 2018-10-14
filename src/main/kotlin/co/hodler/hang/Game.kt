@@ -1,3 +1,5 @@
+package co.hodler.hang
+
 import java.util.*
 
 fun main(args: Array<String>) {

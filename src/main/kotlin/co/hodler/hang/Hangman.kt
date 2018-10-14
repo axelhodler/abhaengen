@@ -1,3 +1,5 @@
+package co.hodler.hang
+
 class Hangman(val pickedLetters: List<Char> = emptyList(),
               val wordToGuess: String) {
     private val placeholder = '_'
