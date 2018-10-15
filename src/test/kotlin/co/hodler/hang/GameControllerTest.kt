@@ -22,10 +22,11 @@ class GameControllerTest {
 
     @Test
     fun `can play the game`() {
-        val response = subject.`pick letter`()
+        val response = subject.`pick letter`("2")
 
         val parsedJson = JsonPath.parse(response)
         assertThatJson(parsedJson).field("['placeholder']").isEqualTo("_r__");
+        assertThatJson(parsedJson).field("['game_id']").isEqualTo("2");
     }
 }
 
@@ -33,6 +34,7 @@ class GameServiceStub : GameService {
     override fun playGame(id: String): String {
         return """
             {
+                "game_id": "${id}",
                 "placeholder": "_r__"
             }
         """.trimIndent()
