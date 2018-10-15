@@ -14,15 +14,10 @@ fun main(args: Array<String>) {
 }
 
 @RestController
-class GameController {
+class GameController(val gameService: GameService) {
     @PostMapping("/game")
     fun `play`(): String {
-        return """
-            {
-                "game_id": "1",
-                "placeholder": "____"
-            }
-        """.trimIndent()
+        return gameService.startGame()
     }
 
     @PatchMapping("/game/{gameId}")
@@ -32,5 +27,6 @@ class GameController {
                 "placeholder": "_r__"
             }
         """.trimIndent()
+        return gameService.playGame("1")
     }
 }

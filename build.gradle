@@ -61,6 +61,10 @@ task integrationTest(type: Test) {
     }
     check.dependsOn it
     shouldRunAfter test
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
 }
 
 dependencies {
