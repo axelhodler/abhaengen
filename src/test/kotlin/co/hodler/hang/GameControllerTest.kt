@@ -31,13 +31,11 @@ class GameControllerTest {
 }
 
 class GameServiceStub : GameService {
-    override fun playGame(id: String): String {
-        return """
-            {
-                "game_id": "${id}",
-                "placeholder": "_r__"
-            }
-        """.trimIndent()
+    override fun playGame(id: String): GameStatus {
+        return GameStatus(
+                id = id,
+                placeholder = "_r__"
+        )
     }
 
     override fun startGame(): String {

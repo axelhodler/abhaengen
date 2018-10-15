@@ -23,6 +23,13 @@ class GameController(val gameService: GameService) {
 
     @PatchMapping("/game/{gameId}")
     fun `pick letter`(@PathVariable gameId: String): String {
-        return gameService.playGame(gameId)
+        val game = gameService.playGame(gameId)
+        return """
+            {
+                "game_id": "${game.id}",
+                "placeholder": "${game.placeholder}"
+            }
+        """.trimIndent()
     }
 }
+
