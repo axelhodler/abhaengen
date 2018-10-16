@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
 class GameController(val gameService: GameService) {
     @PostMapping("/game")
     fun `play`(): String {
-        val game = gameService.startGame()
+        val game = gameService.initGame()
         return toJson(game)
     }
 

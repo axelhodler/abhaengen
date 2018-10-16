@@ -1,7 +1,7 @@
 package co.hodler.hang
 
 interface GameService {
-    fun startGame(): GameStatus
+    fun initGame(): GameStatus
 
     fun playGame(id: String, pickedLetter: Char): GameStatus
 }

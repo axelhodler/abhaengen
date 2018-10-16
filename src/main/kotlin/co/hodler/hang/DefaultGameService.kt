@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service
 class DefaultGameService(val gameRepository: GameRepository,
                          val wordService: WordService) : GameService {
     private var gameIdCounter = 1
-    override fun startGame(): GameStatus {
+    override fun initGame(): GameStatus {
         val game = gameRepository.saveGame(
                 id = gameIdCounter.toString(),
+                word = wordService.randomWord(),
                 pickedLetters = emptyList()
         )
         gameIdCounter++
@@ -33,7 +34,7 @@ class DefaultGameService(val gameRepository: GameRepository,
 interface GameRepository {
     fun findGameById(id: String): Game
 
-    fun saveGame(id: String, word: String = "tree", pickedLetters: List<Char>): Game
+    fun saveGame(id: String, word: String, pickedLetters: List<Char>): Game
 }
 
 data class Game(val id: String,

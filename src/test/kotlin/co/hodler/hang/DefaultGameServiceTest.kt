@@ -12,7 +12,7 @@ internal class DefaultGameServiceTest {
 
     @Test
     fun `stores game`() {
-        subject.startGame()
+        subject.initGame()
         val gamestatus = subject.playGame("1", 'e')
 
         assertThat(gamestatus.id).isEqualTo("1")
@@ -21,9 +21,9 @@ internal class DefaultGameServiceTest {
 
     @Test
     fun `stores games`() {
-        subject.startGame()
-        subject.startGame()
-        subject.startGame()
+        subject.initGame()
+        subject.initGame()
+        subject.initGame()
         val gamestatus = subject.playGame("3", 'a')
 
         assertThat(gamestatus.id).isEqualTo("3")

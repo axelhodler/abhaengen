@@ -40,7 +40,7 @@ class GameServiceStub : GameService {
         )
     }
 
-    override fun startGame(): GameStatus {
+    override fun initGame(): GameStatus {
         return GameStatus(
                 id = "1",
                 placeholder = "____"
