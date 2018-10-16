@@ -72,6 +72,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.7'
     testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
     testCompile("org.junit.jupiter:junit-jupiter-params:5.2.0")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")

@@ -1,18 +1,25 @@
 package co.hodler.hang
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+
 
 @SpringBootApplication
-class HangmanApplication
+class HangmanApplication {
+    @Autowired
+    fun configureObjectMapper(mapper: ObjectMapper) {
+        mapper.registerModule(KotlinModule())
+    }
+}
 
 fun main(args: Array<String>) {
     runApplication<HangmanApplication>(*args)
 }
+
 
 @RestController
 class GameController(val gameService: GameService) {
@@ -22,9 +29,9 @@ class GameController(val gameService: GameService) {
         return toJson(game)
     }
 
-    @PatchMapping("/game/{gameId}")
-    fun `pick letter`(@PathVariable gameId: String): String {
-        val game = gameService.playGame(gameId)
+    @PatchMapping(value = "/game/{gameId}")
+    fun pickLetter(@RequestBody pickedCharacter: PickedCharacter, @PathVariable gameId: String): String {
+        val game = gameService.playGame(gameId, pickedCharacter.pick)
         return toJson(game)
     }
 
@@ -38,3 +45,4 @@ class GameController(val gameService: GameService) {
     }
 }
 
+data class PickedCharacter(var pick: Char)

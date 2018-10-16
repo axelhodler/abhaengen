@@ -7,6 +7,9 @@ org.springframework.cloud.contract.spec.Contract.make {
         body([
             pick: "r"
         ])
+        headers {
+            header('Content-Type', 'application/json')
+        }
     }
 
     response {

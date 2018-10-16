@@ -22,7 +22,9 @@ class GameControllerTest {
 
     @Test
     fun `can play the game`() {
-        val response = subject.`pick letter`("2")
+        val pick = PickedCharacter('r')
+
+        val response = subject.pickLetter(pick, "2")
 
         val parsedJson = JsonPath.parse(response)
         assertThatJson(parsedJson).field("['placeholder']").isEqualTo("_r__");
