@@ -17,11 +17,14 @@ class DefaultGameService(val gameRepository: GameRepository) : GameService {
         )
     }
 
-    override fun playGame(id: String): GameStatus {
+    override fun playGame(id: String, pickedLetter: Char): GameStatus {
         val game = gameRepository.findGameById(id)
         return GameStatus(
                 id = game.id,
-                placeholder = Hangman(game.pickedLetters, game.originalWord).display()
+                placeholder = Hangman(
+                        game.pickedLetters + listOf(pickedLetter),
+                        game.originalWord
+                ).display()
         )
     }
 }

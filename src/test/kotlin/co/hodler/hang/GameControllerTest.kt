@@ -31,7 +31,7 @@ class GameControllerTest {
 }
 
 class GameServiceStub : GameService {
-    override fun playGame(id: String): GameStatus {
+    override fun playGame(id: String, pickedLetter: Char): GameStatus {
         return GameStatus(
                 id = id,
                 placeholder = "_r__"

@@ -12,10 +12,10 @@ internal class DefaultGameServiceTest {
     @Test
     fun `stores game`() {
         subject.startGame()
-        val gamestatus = subject.playGame("1")
+        val gamestatus = subject.playGame("1", 'e')
 
         assertThat(gamestatus.id).isEqualTo("1")
-        assertThat(gamestatus.placeholder).isEqualTo("_r__")
+        assertThat(gamestatus.placeholder).isEqualTo("__ee")
     }
 
     @Test
@@ -23,10 +23,10 @@ internal class DefaultGameServiceTest {
         subject.startGame()
         subject.startGame()
         subject.startGame()
-        val gamestatus = subject.playGame("3")
+        val gamestatus = subject.playGame("3", 'a')
 
         assertThat(gamestatus.id).isEqualTo("3")
-        assertThat(gamestatus.placeholder).isEqualTo("_r__")
+        assertThat(gamestatus.placeholder).isEqualTo("____")
     }
 }
 
@@ -41,8 +41,6 @@ class InMemoryGameRepository : GameRepository {
     }
 
     override fun findGameById(id: String): Game {
-        val game = games.find { it.id == id }
-        return Game(game!!.id, game!!.originalWord,
-                listOf('r'))
+        return games.find { it.id == id }!!
     }
 }
