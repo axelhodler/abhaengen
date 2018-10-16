@@ -3,7 +3,6 @@ package co.hodler.hang
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import org.springframework.stereotype.Repository
 
 @Tag("unit")
 internal class DefaultGameServiceTest {
@@ -31,17 +30,3 @@ internal class DefaultGameServiceTest {
     }
 }
 
-@Repository
-class InMemoryGameRepository : GameRepository {
-    private var games = mutableListOf<Game>()
-
-    override fun saveGame(id: String, word: String, pickedLetters: List<Char>): Game {
-        val game = Game(id, word, pickedLetters)
-        games.add(game)
-        return game
-    }
-
-    override fun findGameById(id: String): Game {
-        return games.find { it.id == id }!!
-    }
-}
