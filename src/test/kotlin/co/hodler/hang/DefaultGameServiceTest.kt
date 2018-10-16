@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository
 
 @Tag("unit")
 internal class DefaultGameServiceTest {
-    private val subject = DefaultGameService(InMemoryGameRepository())
+    private val subject =
+            DefaultGameService(InMemoryGameRepository(), SingleWordService())
 
     @Test
     fun `stores game`() {

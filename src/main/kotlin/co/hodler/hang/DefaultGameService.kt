@@ -3,7 +3,8 @@ package co.hodler.hang
 import org.springframework.stereotype.Service
 
 @Service
-class DefaultGameService(val gameRepository: GameRepository) : GameService {
+class DefaultGameService(val gameRepository: GameRepository,
+                         val wordService: WordService) : GameService {
     private var gameIdCounter = 1
     override fun startGame(): GameStatus {
         val game = gameRepository.saveGame(
@@ -13,7 +14,7 @@ class DefaultGameService(val gameRepository: GameRepository) : GameService {
         gameIdCounter++
         return GameStatus(
                 id = game.id,
-                placeholder = Hangman(wordToGuess = "tree").display()
+                placeholder = Hangman(wordToGuess = wordService.randomWord()).display()
         )
     }
 
