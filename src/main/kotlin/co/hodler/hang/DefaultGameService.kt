@@ -21,13 +21,18 @@ class DefaultGameService(val gameRepository: GameRepository,
 
     override fun playGame(id: String, pickedLetter: Char): GameStatus {
         val game = gameRepository.findGameById(id)
-        return GameStatus(
+        val gamestatus = GameStatus(
                 id = game.id,
                 placeholder = Hangman(
                         game.pickedLetters + listOf(pickedLetter),
                         game.originalWord
                 ).display()
         )
+        gameRepository.saveGame(
+                id = game.id,
+                word = game.originalWord,
+                pickedLetters = game.pickedLetters + listOf(pickedLetter))
+        return gamestatus
     }
 }
 

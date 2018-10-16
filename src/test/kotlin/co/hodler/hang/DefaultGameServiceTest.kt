@@ -28,5 +28,14 @@ internal class DefaultGameServiceTest {
         assertThat(gamestatus.id).isEqualTo("3")
         assertThat(gamestatus.placeholder).isEqualTo("____")
     }
+
+    @Test
+    fun `can pick multiple letters in same game`() {
+        subject.initGame()
+        subject.playGame("1", 'r')
+        val gamestatus = subject.playGame("1", 'e')
+
+        assertThat(gamestatus.placeholder).isEqualTo("_ree")
+    }
 }
 
