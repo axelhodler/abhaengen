@@ -18,18 +18,23 @@ fun main(args: Array<String>) {
 class GameController(val gameService: GameService) {
     @PostMapping("/game")
     fun `play`(): String {
-        return gameService.startGame()
+        val game = gameService.startGame()
+        return toJson(game)
     }
 
     @PatchMapping("/game/{gameId}")
     fun `pick letter`(@PathVariable gameId: String): String {
         val game = gameService.playGame(gameId)
+        return toJson(game)
+    }
+
+    private fun toJson(game: GameStatus): String {
         return """
-            {
-                "game_id": "${game.id}",
-                "placeholder": "${game.placeholder}"
-            }
-        """.trimIndent()
+                {
+                    "game_id": "${game.id}",
+                    "placeholder": "${game.placeholder}"
+                }
+            """.trimIndent()
     }
 }
 

@@ -4,8 +4,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class DefaultGameService(val gameRepository: GameRepository) : GameService {
-    override fun startGame(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun startGame(): GameStatus {
+        return GameStatus(
+                id = "1",
+                placeholder = Hangman(wordToGuess = "tree").display()
+        )
     }
 
     override fun playGame(id: String): GameStatus {
@@ -19,6 +22,8 @@ class DefaultGameService(val gameRepository: GameRepository) : GameService {
 
 interface GameRepository {
     fun findGameById(id: String): Game
+
+    fun saveGame(id: String, pickedLetters: List<Char>)
 }
 
 data class Game(val id: String,

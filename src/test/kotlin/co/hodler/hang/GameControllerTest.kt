@@ -38,13 +38,10 @@ class GameServiceStub : GameService {
         )
     }
 
-    override fun startGame(): String {
-        return """
-            {
-                "game_id": "1",
-                "placeholder": "____"
-            }
-        """.trimIndent()
+    override fun startGame(): GameStatus {
+        return GameStatus(
+                id = "1",
+                placeholder = "____"
+        )
     }
-
 }
