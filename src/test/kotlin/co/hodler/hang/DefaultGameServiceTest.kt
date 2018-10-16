@@ -35,8 +35,8 @@ internal class DefaultGameServiceTest {
 class InMemoryGameRepository : GameRepository {
     private var games = mutableListOf<Game>()
 
-    override fun saveGame(id: String, pickedLetters: List<Char>): Game {
-        val game = Game(id, "tree", pickedLetters)
+    override fun saveGame(id: String, word: String, pickedLetters: List<Char>): Game {
+        val game = Game(id, word, pickedLetters)
         games.add(game)
         return game
     }

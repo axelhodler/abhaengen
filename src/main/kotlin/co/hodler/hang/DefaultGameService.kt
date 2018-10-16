@@ -33,7 +33,7 @@ class DefaultGameService(val gameRepository: GameRepository,
 interface GameRepository {
     fun findGameById(id: String): Game
 
-    fun saveGame(id: String, pickedLetters: List<Char>): Game
+    fun saveGame(id: String, word: String = "tree", pickedLetters: List<Char>): Game
 }
 
 data class Game(val id: String,
