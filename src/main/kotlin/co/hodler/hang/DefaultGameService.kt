@@ -23,7 +23,7 @@ class DefaultGameService(val gameRepository: GameRepository,
                         game.originalWord
                 ).display()
         )
-        gameRepository.saveGame(
+        gameRepository.updateGame(
                 id = game.id,
                 word = game.originalWord,
                 pickedLetters = game.pickedLetters + listOf(pickedLetter))
@@ -36,7 +36,7 @@ interface GameRepository {
 
     fun storeGame(word: String): Game
 
-    fun saveGame(id: String, word: String, pickedLetters: List<Char>): Game
+    fun updateGame(id: String, word: String, pickedLetters: List<Char>): Game
 }
 
 data class Game(val id: String,

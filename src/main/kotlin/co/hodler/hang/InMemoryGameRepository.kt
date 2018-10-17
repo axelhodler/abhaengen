@@ -15,19 +15,15 @@ class InMemoryGameRepository : GameRepository {
         return newGame;
     }
 
-    override fun saveGame(id: String, word: String, pickedLetters: List<Char>): Game {
-        var gamePresent = games.containsKey(id)
-        val game = if (gamePresent) {
-            val foundGame = games.get(id)!!
-            Game(id = id,
-                    originalWord = foundGame.originalWord,
-                    pickedLetters = pickedLetters)
-
-        } else {
-            Game(id, word, pickedLetters)
-        }
-        games.put(id, game)
-        return game
+    override fun updateGame(id: String, word: String, pickedLetters: List<Char>): Game {
+        val foundGame = games.get(id)!!
+        val updatedGame = Game(
+                id = id,
+                originalWord = foundGame.originalWord,
+                pickedLetters = pickedLetters
+        )
+        games.put(id, updatedGame)
+        return updatedGame
     }
 
     override fun findGameById(id: String): Game {
