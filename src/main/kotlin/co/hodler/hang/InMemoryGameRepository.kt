@@ -16,7 +16,7 @@ class InMemoryGameRepository : GameRepository {
     }
 
     override fun updateGame(id: String, pickedLetters: List<Char>): Game {
-        val foundGame = games.get(id)!!
+        val foundGame = this.findGameById(id)
         val updatedGame = Game(
                 id = id,
                 originalWord = foundGame.originalWord,
@@ -27,6 +27,10 @@ class InMemoryGameRepository : GameRepository {
     }
 
     override fun findGameById(id: String): Game {
-        return games.get(id)!!
+        return games.get(id) ?: throw GameNotFoundException()
     }
+}
+
+class GameNotFoundException : RuntimeException() {
+
 }
