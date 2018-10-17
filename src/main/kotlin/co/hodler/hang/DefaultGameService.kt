@@ -25,7 +25,6 @@ class DefaultGameService(val gameRepository: GameRepository,
         )
         gameRepository.updateGame(
                 id = game.id,
-                word = game.originalWord,
                 pickedLetters = game.pickedLetters + listOf(pickedLetter))
         return gamestatus
     }
@@ -36,7 +35,7 @@ interface GameRepository {
 
     fun storeGame(word: String): Game
 
-    fun updateGame(id: String, word: String, pickedLetters: List<Char>): Game
+    fun updateGame(id: String, pickedLetters: List<Char>): Game
 }
 
 data class Game(val id: String,

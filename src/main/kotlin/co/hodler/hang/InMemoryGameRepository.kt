@@ -15,7 +15,7 @@ class InMemoryGameRepository : GameRepository {
         return newGame;
     }
 
-    override fun updateGame(id: String, word: String, pickedLetters: List<Char>): Game {
+    override fun updateGame(id: String, pickedLetters: List<Char>): Game {
         val foundGame = games.get(id)!!
         val updatedGame = Game(
                 id = id,
