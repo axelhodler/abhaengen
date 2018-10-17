@@ -7,15 +7,12 @@ class DefaultGameService(val gameRepository: GameRepository,
                          val wordService: WordService) : GameService {
     private var gameIdCounter = 1
     override fun initGame(): GameStatus {
-        val game = gameRepository.saveGame(
-                id = gameIdCounter.toString(),
-                word = wordService.randomWord(),
-                pickedLetters = emptyList()
-        )
+        val word = wordService.randomWord()
+        val game = gameRepository.storeGame(word)
         gameIdCounter++
         return GameStatus(
                 id = game.id,
-                placeholder = Hangman(wordToGuess = wordService.randomWord()).display()
+                placeholder = Hangman(wordToGuess = word).display()
         )
     }
 
@@ -38,6 +35,8 @@ class DefaultGameService(val gameRepository: GameRepository,
 
 interface GameRepository {
     fun findGameById(id: String): Game
+
+    fun storeGame(word: String): Game
 
     fun saveGame(id: String, word: String, pickedLetters: List<Char>): Game
 }
